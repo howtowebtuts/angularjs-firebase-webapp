@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebApp Home Page</title>
+</head>
+<body ng-controller="WelcomeCtrl">
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="#" class="navbar-brand">WebApp</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#/welcome">Home</a></li>
+			<li><a href="#/addPost">Add Post</a></li>
+			<li ng-click="logout()"><a href="#">Logout</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Welcome Home {{username}} !</h3>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row" ng-repeat="article in articles">
+		<div class="col-md-12 well well-sm">
+			<h4>{{article.title}}</h4>
+			<p>{{article.post}}</p>
+			<button type="submit" class="btn btn-sm btn-primary" ng-click="editPost(article.$id)" data-target="#editModal" data-toggle="modal">Edit</button>
+			<button type="submit" class="btn btn-sm btn-danger" ng-click="deleteCnf(article)" data-target="#deleteModal" data-toggle="modal">Delete</button>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div id="editModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>Edit Post Details</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" name="title" class="form-control" ng-model="editPostData.title" />
+						</div>
+						<div class="form-group">
+							<label for="post">Post</label>
+							<textarea name="post" class="form-control" ng-model="editPostData.post"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-primary" ng-click="updatePost(editPostData.$id)">Update Post</button>
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div id="deleteModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete the post?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-danger" ng-click="deletePost(deleteArticle)">Delete</button>
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
