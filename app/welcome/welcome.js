@@ -9,8 +9,12 @@ angular.module('webApp.welcome', ['ngRoute', 'firebase'])
 	});
 }])
 
-.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', function($scope, CommonProp, $firebaseArray, $firebaseObject){
+.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location){
 	$scope.username = CommonProp.getUser();
+
+	if(!$scope.username){
+		$location.path('/home');
+	}
 
 	var ref = firebase.database().ref().child('Articles');
 	$scope.articles = $firebaseArray(ref);	
@@ -26,7 +30,9 @@ angular.module('webApp.welcome', ['ngRoute', 'firebase'])
 			title: $scope.editPostData.title,
 			post: $scope.editPostData.post
 		}).then(function(ref){
-			$("#editModal").modal('hide');
+			$scope.$apply(function(){
+				$("#editModal").modal('hide');
+			});
 		}, function(error){
 			console.log(error);
 		});

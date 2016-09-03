@@ -13,6 +13,10 @@ angular.module('webApp.home', ['ngRoute', 'firebase'])
 
 	$scope.username = CommonProp.getUser();
 
+	if($scope.username){
+		$location.path('/welcome');
+	}
+
 	$scope.signIn = function(){
 		var username = $scope.user.email;
 		var password = $scope.user.password;

@@ -18,6 +18,14 @@
 	</div>
 </nav>
 
+<div class="container" ng-show="success">
+	<div class="row">
+		<div class="alert alert-success">
+			<strong>Success!</strong> The post has beed added.
+		</div>
+	</div>
+</div>
+
 <div class="container">
 	<form role="form" name="postForm" ng-submit="createPost()" novalidate="">
 		<legend>Create Post</legend>
